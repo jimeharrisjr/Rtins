@@ -6,11 +6,13 @@ using namespace Rcpp;
 using namespace Tins;
 
 //[[Rcpp::export]]
-DataFrame read_pcap_(std::string fname, std::string filter, unsigned int layers) {
+DataFrame read_pcap_(std::string iface, std::string filter, unsigned int layers) {
   SnifferConfiguration config;
   config.set_filter(filter);
-  FileSniffer cap(fname, config);
-  
+  //FileSniffer cap(fname, config);
+  Sniffer cap(iface, config);
+  config.set_promisc_mode(true);
+  config.set_immediate_mode(true);
   std::vector<int> tv_sec;
   std::vector<int> tv_usec;
   std::vector<std::vector<int>> size(layers);

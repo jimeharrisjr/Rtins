@@ -17,14 +17,13 @@ NULL
 #' 
 #' ## End(Not run)
 #' @export
-read_pcap <- function(fname, filter, layers=3) {
-  fname <- path.expand(fname)
-  stopifnot(file.exists(fname))
+read_pcap <- function(iface, filter, layers=3) {
+
   stopifnot(layers > 0)
   if (missing(filter)) filter <- ""
-  df <- read_pcap_(fname, filter, layers)
+  df <- read_pcap_(iface, filter, layers)
   class(df) <- c("pcap", class(df))
-  attr(df, "fname") <- fname
+  attr(df, "iface") <- iface
   attr(df, "filter") <- filter
   attr(df, "layers") <- layers
   df
@@ -36,10 +35,10 @@ summary.pcap <- function(object, ...) {
   ts_last <- object$tv_sec[[nrow(object)]] + object$tv_usec[[nrow(object)]]*1e-6
   ts_span <- ts_last - ts_first
   cat("File info\n",
-      "  Capture file   : ", attr(object, "fname"), "\n",
+      "  Capture file   : ", attr(object, "iface"), "\n",
       "  Filter applied : ", attr(object, "filter"), "\n",
       "  Layers decoded : ", attr(object, "layers"), "\n",
-      "  Length (bytes) : ", file.size(attr(object, "fname")), "\n\n",
+      "  Length (bytes) : ", file.size(attr(object, "iface")), "\n\n",
       "Time info\n",
       "  First packet   : ", format(as.POSIXct(ts_first, origin="1970-01-01 00:00:00", tz="UTC")), "\n",
       "  Last packet    : ", format(as.POSIXct(ts_last, origin="1970-01-01 00:00:00", tz="UTC")), "\n\n",
