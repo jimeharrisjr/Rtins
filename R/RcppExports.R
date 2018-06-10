@@ -5,3 +5,7 @@ sniff_pcap_ <- function(iface, filter, num, layers) {
     .Call(`_Rtins_sniff_pcap_`, iface, filter, num, layers)
 }
 
+read_pcap_ <- function(fname, filter, layers) {
+    .Call(`_Rtins_read_pcap_`, fname, filter, layers)
+}
+

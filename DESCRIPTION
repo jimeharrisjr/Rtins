@@ -1,10 +1,11 @@
 Package: Rtins
 Type: Package
-Title: Tools for Reading and Parsing Live Network Packet Capture (PCAP)  in R
-Version: 0.0.0.9500
+Title: Tools for Reading and Parsing Live and Saved Network Packet Capture (PCAP) in R
+Version: 0.0.0.9600
 Authors@R: c(
-    person("Iñaki", "Ucar", email="i.ucar86@gmail.com", role=c("aut", "cph", "cre")))
-Description: Provides tools for analysing network captures in R on top of 'libtins' 
+    person("Iñaki", "Ucar", email="i.ucar86@gmail.com", role=c("aut", "cph")), 
+    person("James","Harris",email="jim@jeharrisllc.com", role=c('aut','cre')))
+Description: Provides tools for capturing and analysing network captures in R on top of 'libtins' 
     <http://libtins.github.io>, a high-level, multiplatform C++ network packet 
     decoding and crafting library.
 License: MIT + file LICENSE

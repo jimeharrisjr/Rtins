@@ -7,6 +7,12 @@ NULL
 #' @param fname path to the capture file.
 #' @param filter BPF filter to apply for reading the capture.
 #' @param layers number of layers to decode.
+#' Sniff a PCAP file
+#' 
+#' @param iface network interface to sniff.
+#' @param filter BPF filter to apply for reading the capture.
+#' @param num number of packets to collect
+#' @param layers number of layers to decode.
 #' 
 #' @examples
 #' ## Not run:
@@ -18,13 +24,27 @@ NULL
 #' ## End(Not run)
 #' @export
 sniff_pcap <- function(iface, filter, num,layers=3) {
-  library(data.table)
+  require(data.table)
   stopifnot(layers > 0)
   if (missing(filter)) filter <- ""
   if (missing(num)) num <- 10
   df <- as.data.table(sniff_pcap_(iface, filter, num, layers))
   class(df) <- c("pcap", class(df))
   attr(df, "iface") <- iface
+  attr(df, "filter") <- filter
+  attr(df, "layers") <- layers
+  df
+}
+
+read_pcap <- function(fname, filter, layers=3) {
+  require(data.table)
+  fname <- path.expand(fname)
+  stopifnot(file.exists(fname))
+  stopifnot(layers > 0)
+  if (missing(filter)) filter <- ""
+  df <- as.data.table(read_pcap_(fname, filter, layers))
+  class(df) <- c("pcap", class(df))
+  attr(df, "fname") <- fname
   attr(df, "filter") <- filter
   attr(df, "layers") <- layers
   df
