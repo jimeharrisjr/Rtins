@@ -6,16 +6,21 @@ using namespace Rcpp;
 using namespace Tins;
 
 //[[Rcpp::export]]
-DataFrame read_pcap_(std::string iface, std::string filter, unsigned int layers) {
+DataFrame read_pcap_(std::string iface, std::string filter,  unsigned int layers) {
   SnifferConfiguration config;
   config.set_filter(filter);
   //FileSniffer cap(fname, config);
-  Sniffer cap(iface, config);
+  std::vector<Packet> cap;
   config.set_promisc_mode(true);
   config.set_immediate_mode(true);
+  Sniffer sniffer(iface, config);
+  while (cap.size() != 10) {
+    // next_packet returns a PtrPacket, which can be implicitly converted to Packet.
+    cap.push_back(sniffer.next_packet());
+  }
   std::vector<int> tv_sec;
   std::vector<int> tv_usec;
-  std::vector<std::vector<int>> size(layers);
+  std::vector<std::vector<int> > size(layers);
   std::vector<std::vector<std::string> > layer(layers);
   std::vector<std::vector<std::string> > src(layers);
   std::vector<std::vector<std::string> > dst(layers);

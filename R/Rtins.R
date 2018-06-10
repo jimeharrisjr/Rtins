@@ -17,7 +17,7 @@ NULL
 #' 
 #' ## End(Not run)
 #' @export
-read_pcap <- function(iface, filter, layers=3) {
+read_pcap <- function(iface, filter, num=10,layers=3) {
 
   stopifnot(layers > 0)
   if (missing(filter)) filter <- ""
@@ -26,7 +26,6 @@ read_pcap <- function(iface, filter, layers=3) {
   attr(df, "iface") <- iface
   attr(df, "filter") <- filter
   attr(df, "layers") <- layers
-  if (nrow(df)>=5)stop()
   df
 }
 
