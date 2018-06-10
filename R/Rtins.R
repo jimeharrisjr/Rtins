@@ -17,11 +17,12 @@ NULL
 #' 
 #' ## End(Not run)
 #' @export
-read_pcap <- function(iface, filter, num=10,layers=3) {
-
+read_pcap <- function(iface, filter, num,layers=3) {
+  library(data.table)
   stopifnot(layers > 0)
   if (missing(filter)) filter <- ""
-  df <- read_pcap_(iface, filter, layers)
+  if (missing(num)) num <- 10
+  df <- as.data.table(read_pcap_(iface, filter, num, layers))
   class(df) <- c("pcap", class(df))
   attr(df, "iface") <- iface
   attr(df, "filter") <- filter

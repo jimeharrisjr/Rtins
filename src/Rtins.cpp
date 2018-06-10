@@ -6,7 +6,7 @@ using namespace Rcpp;
 using namespace Tins;
 
 //[[Rcpp::export]]
-DataFrame read_pcap_(std::string iface, std::string filter,  unsigned int layers) {
+DataFrame read_pcap_(std::string iface, std::string filter, unsigned int num,  unsigned int layers) {
   SnifferConfiguration config;
   config.set_filter(filter);
   //FileSniffer cap(fname, config);
@@ -14,7 +14,7 @@ DataFrame read_pcap_(std::string iface, std::string filter,  unsigned int layers
   config.set_promisc_mode(true);
   config.set_immediate_mode(true);
   Sniffer sniffer(iface, config);
-  while (cap.size() != 10) {
+  while (cap.size() != num) {
     // next_packet returns a PtrPacket, which can be implicitly converted to Packet.
     cap.push_back(sniffer.next_packet());
   }
