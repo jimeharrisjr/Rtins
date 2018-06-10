@@ -5,9 +5,9 @@
 
 using namespace Rcpp;
 
-// read_pcap_
-DataFrame read_pcap_(std::string iface, std::string filter, unsigned int num, unsigned int layers);
-RcppExport SEXP _Rtins_read_pcap_(SEXP ifaceSEXP, SEXP filterSEXP, SEXP numSEXP, SEXP layersSEXP) {
+// sniff_pcap_
+DataFrame sniff_pcap_(std::string iface, std::string filter, unsigned int num, unsigned int layers);
+RcppExport SEXP _Rtins_sniff_pcap_(SEXP ifaceSEXP, SEXP filterSEXP, SEXP numSEXP, SEXP layersSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -15,13 +15,13 @@ BEGIN_RCPP
     Rcpp::traits::input_parameter< std::string >::type filter(filterSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type num(numSEXP);
     Rcpp::traits::input_parameter< unsigned int >::type layers(layersSEXP);
-    rcpp_result_gen = Rcpp::wrap(read_pcap_(iface, filter, num, layers));
+    rcpp_result_gen = Rcpp::wrap(sniff_pcap_(iface, filter, num, layers));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_Rtins_read_pcap_", (DL_FUNC) &_Rtins_read_pcap_, 4},
+    {"_Rtins_sniff_pcap_", (DL_FUNC) &_Rtins_sniff_pcap_, 4},
     {NULL, NULL, 0}
 };
 

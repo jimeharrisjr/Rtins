@@ -6,7 +6,7 @@ using namespace Rcpp;
 using namespace Tins;
 
 //[[Rcpp::export]]
-DataFrame read_pcap_(std::string iface, std::string filter, unsigned int num,  unsigned int layers) {
+DataFrame sniff_pcap_(std::string iface, std::string filter, unsigned int num,  unsigned int layers) {
   SnifferConfiguration config;
   config.set_filter(filter);
   //FileSniffer cap(fname, config);
