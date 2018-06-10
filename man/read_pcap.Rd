@@ -22,6 +22,5 @@ fname <- system.file("pcaps/http.cap", package="Rtins")
 pcap <- read_pcap(fname)
 head(pcap)
 summary(pcap)
-
 ## End(Not run)
 }

@@ -2,11 +2,7 @@
 #' @importFrom Rcpp evalCpp
 NULL
 
-#' Read a PCAP file
-#' 
-#' @param fname path to the capture file.
-#' @param filter BPF filter to apply for reading the capture.
-#' @param layers number of layers to decode.
+
 #' Sniff a PCAP file
 #' 
 #' @param iface network interface to sniff.
@@ -16,10 +12,11 @@ NULL
 #' 
 #' @examples
 #' ## Not run:
-#' fname <- system.file("pcaps/http.cap", package="Rtins")
-#' pcap <- read_pcap(fname)
+#' interface<-'eth0'
+#' pcap <- sniff_pcap(interface)
 #' head(pcap)
 #' summary(pcap)
+#' head(sniff_pcap(interface, filter = "udp and dst port 53", num = 20))
 #' 
 #' ## End(Not run)
 #' @export
@@ -35,7 +32,20 @@ sniff_pcap <- function(iface, filter, num,layers=3) {
   attr(df, "layers") <- layers
   df
 }
-
+#' Read a PCAP file
+#' 
+#' @param fname path to the capture file.
+#' @param filter BPF filter to apply for reading the capture.
+#' @param layers number of layers to decode.
+#' 
+#' @examples
+#' ## Not run:
+#' fname <- system.file("pcaps/http.cap", package="Rtins")
+#' pcap <- read_pcap(fname)
+#' head(pcap)
+#' summary(pcap)
+#' ## End(Not run)
+#' @export
 read_pcap <- function(fname, filter, layers=3) {
   require(data.table)
   fname <- path.expand(fname)
