@@ -1,13 +1,13 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-Rtins: Tools for Reading and Parsing Network Packet Capture (PCAP) Files in R
+Rtins: Tools for Sniffing, Reading, and Parsing Network Packet Capture (PCAP) Files in R
 =============================================================================
 
 The **Rtins** package provides tools for analysing network captures in R on top of [`libtins`](http://libtins.github.io), a high-level, multiplatform C++ network packet decoding and crafting library.
 
 Installation
 ------------
-
+This fork of Rtins requires the data.table R package for accelerated handling of large data sets. (https://cran.r-project.org/web/packages/data.table/index.html) 
 You need to install the [`libtins`](http://libtins.github.io) library first. And as a minimum requirement, `libtins` needs the development package of `libpcap` (or `WinPcap` for Windows). On Linux,
 
 ``` bash
@@ -23,7 +23,7 @@ sudo make install
 Please, refer to the `libtins` documentation for the installation in other platforms. Then, `Rtins` can be installed using `devtools`:
 
 ``` r
-devtools::install_github("Enchufa2/Rtins")
+devtools::install_github("jimeharrisjr/Rtins")
 ```
 
 Usage
